@@ -10,15 +10,13 @@ import { jsonRpcProvider } from "wagmi/providers/jsonRpc"
 import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 import { Profile } from '../src/Profile';
 
-
-
 const { chains, provider, webSocketProvider } = configureChains (
   [chain.mainnet, chain.polygon ],
   // [publicProvider()],
   [
     jsonRpcProvider({
       rpc: (chain) => ({
-        webSocket: "ws://127.0.0.1:8545"
+        webSocket: `ws://${process.env.NETWORK_ADDRESS}`
       })
     })
   ]
