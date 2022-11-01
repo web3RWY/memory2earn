@@ -15,14 +15,10 @@ export function Profile() {
     _setConnectors(connectors);
   }, [connectors]);
 
-
-//  if(typeof window == "undefined"){
-//     return <div>Loading...</div>
-//  } else {
      
      return (
        <div>
-         {connectors.map((connector) => (
+         {_connectors.map((connector) => (
            <button
              disabled={!connector.ready}
              key={connector.id}
@@ -36,7 +32,7 @@ export function Profile() {
            </button>
          ))}
     
-         {error && <div>{error.message}</div>}
+         {/* {error && <div>{error.message}</div>} */}
        </div>
      )
  }
