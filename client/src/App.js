@@ -15,33 +15,35 @@ import Entry from './wagmi/Entry';
 
 import ButtonAppBar from './wagmi/ButtonAppBar';
   
-  const { chains, provider, webSocketProvider } = configureChains (
-    [chain.mainnet, chain.polygon ],
-    [publicProvider()],
-    [infuraProvider({ apiKey: process.env.INFURA_API_KEY})]
-    [
-      jsonRpcProvider({
-        rpc: (chain) => ({
-          webSocket: `ws://${process.env.NETWORK_ADDRESS}`
-        })
-      })
-    ]
-  );
+// const { chains, provider, webSocketProvider } = configureChains (
+//     // TODO: GanacheからGoerliに変更時に以下変更
+//     // [chain.mainnet, chain.polygon ],
+//     [chain.localhost ],
+//     // [publicProvider()],
+//     // [infuraProvider({ apiKey: process.env.INFURA_API_KEY})]
+//     [
+//       jsonRpcProvider({
+//         rpc: (chain) => ({
+//           webSocket: `ws://${process.env.NETWORK_ADDRESS}`
+//         })
+//       })
+//     ]
+//   );
   
-  const client = createClient({
-    autoConnect: true,
-    provider,
-    webSocketProvider,
-  })
+//   const client = createClient({
+//     autoConnect: true,
+//     provider,
+//     webSocketProvider,
+//   })
   
   
   export default function App() {
     return (
-      <WagmiConfig client={client}>
+      // <WagmiConfig client={client}>
         <Layout>
           <Entry />
         </Layout>
-      </WagmiConfig>
+      // </WagmiConfig>
     )
   }
   
