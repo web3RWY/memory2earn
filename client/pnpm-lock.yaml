@@ -5,6 +5,7 @@ specifiers:
   '@babel/preset-env': ^7.19.4
   '@emotion/react': ^11.10.5
   '@emotion/styled': ^11.10.5
+  '@fontsource/roboto': ^4.5.8
   '@mui/icons-material': ^5.10.9
   '@mui/material': ^5.10.12
   '@tanstack/query-core': ^4.14.1
@@ -23,6 +24,7 @@ dependencies:
   '@babel/preset-env': 7.19.4_@babel+core@7.19.6
   '@emotion/react': 11.10.5_otspjrsspon4ofp37rshhlhp2y
   '@emotion/styled': 11.10.5_tt3r6vn4t4dcl62jlv4a63dmru
+  '@fontsource/roboto': 4.5.8
   '@mui/icons-material': 5.10.9_mo5gypylvz6jbywgfdwdjppqyu
   '@mui/material': 5.10.12_5rzy53przelm5jchjmb5vr6dxy
   '@tanstack/query-core': 4.14.1
@@ -1855,6 +1857,10 @@ packages:
       '@ethersproject/logger': 5.7.0
       '@ethersproject/properties': 5.7.0
       '@ethersproject/strings': 5.7.0
+    dev: false
+
+  /@fontsource/roboto/4.5.8:
+    resolution: {integrity: sha512-CnD7zLItIzt86q4Sj3kZUiLcBk1dSk81qcqgMGaZe7SQ1P8hFNxhMl5AZthK1zrDM5m74VVhaOpuMGIL4gagaA==}
     dev: false
 
   /@hapi/hoek/9.3.0:

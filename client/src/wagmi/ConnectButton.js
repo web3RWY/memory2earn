@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { useConnect, useAccount } from 'wagmi'
-import { Button } from '@mui/material'
+import  {Button}  from '@mui/material'
  
-export function Profile() {
+export function ConnectButton() {
   const { address, connector, isConnected } = useAccount();  
   const { connect, connectors, error, isLoading, pendingConnector } = useConnect();
   const [ _isConnected, _setIsConnected ] = useState(false);
@@ -17,7 +17,6 @@ export function Profile() {
     _setConnectors(connectors);
   }, [connectors]);
   
-
      
      return (
        <div>
@@ -26,13 +25,16 @@ export function Profile() {
              disabled={!connector.ready}
              key={connector.id}
              onClick={() => connect({ connector })}
-             loading={isLoading}
+             color="secondary"
+             variant='contained'
            >
-             {connector.name}
-             {!connector.ready && ' (unsupported)'}
+             {!isLoading ?.id &&
+               'CONNECT WALLET'}
+             {/* {connector.name}
+             {!connector.ready && ' (unsupported)'} */}
              {isLoading &&
                connector.id === pendingConnector?.id &&
-               ' (connecting)'}
+               '(connecting)'}
            </Button>
          ))}
     

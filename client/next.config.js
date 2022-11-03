@@ -3,7 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   env : {
-    NETWORK_ADDRESS: "192.168.68.102:8545"
+    NETWORK_ADDRESS: "127.0.0.1:8545",
+    INFURA_API_KEY: "ac8fc90f805a4520b45fd622c8715dfa"
   }
 }
 

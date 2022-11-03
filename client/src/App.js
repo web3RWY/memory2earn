@@ -5,16 +5,20 @@ import {
     chain,
     defaultChains,
   } from 'wagmi';
-// import { publicProvider } from "wagmi/providers/public";
-import { jsonRpcProvider } from "wagmi/providers/jsonRpc"
-import { MetaMaskConnector } from "wagmi/connectors/metaMask"
-import { Profile } from './Profile';
+import { publicProvider } from "wagmi/providers/public";
+import { infuraProvider } from 'wagmi/providers/infura';
+import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { Profile } from './wagmi/ConnectButton';
+import Layout from '../component/Layout';
+import Entry from './wagmi/Entry';
 
-import ButtonAppBar from '../component/ButtonAppBar';
+import ButtonAppBar from './wagmi/ButtonAppBar';
   
   const { chains, provider, webSocketProvider } = configureChains (
     [chain.mainnet, chain.polygon ],
-    // [publicProvider()],
+    [publicProvider()],
+    [infuraProvider({ apiKey: process.env.INFURA_API_KEY})]
     [
       jsonRpcProvider({
         rpc: (chain) => ({
@@ -26,7 +30,6 @@ import ButtonAppBar from '../component/ButtonAppBar';
   
   const client = createClient({
     autoConnect: true,
-    connectors: [new MetaMaskConnector({ chains })],
     provider,
     webSocketProvider,
   })
@@ -35,8 +38,9 @@ import ButtonAppBar from '../component/ButtonAppBar';
   export default function App() {
     return (
       <WagmiConfig client={client}>
-        <ButtonAppBar />
-        <Profile />
+        <Layout>
+          <Entry />
+        </Layout>
       </WagmiConfig>
     )
   }
