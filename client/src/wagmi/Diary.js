@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import MemoryToEarne from "../../../truffle/build/contracts/MemoryToEarn.json"
+import MemoryToEarn from "../../../truffle/build/contracts/MemoryToEarn.json"
 import { useContractRead } from "wagmi";
 import CreateDiaryButton from "./CreateDiaryButton";
 import { Typography } from "@mui/material";
@@ -9,8 +9,8 @@ import { Button } from "@mui/material"
 
 export default function Diary(){
     const router = useRouter();
-    const abi = MemoryToEarne.abi;
-    const address = MemoryToEarne.networks[5777].address
+    const abi = MemoryToEarn.abi;
+    const address = MemoryToEarn.networks[5777].address
     const { data, isError, isLoading } = useContractRead({
         address: address,
         abi: abi,

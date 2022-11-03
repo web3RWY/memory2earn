@@ -9,6 +9,7 @@ specifiers:
   '@mui/icons-material': ^5.10.9
   '@mui/material': ^5.10.12
   '@tanstack/query-core': ^4.14.1
+  '@tanstack/react-query': ^4.14.1
   eslint: 8.26.0
   eslint-config-next: 13.0.0
   ethers: ^5.7.2
@@ -28,6 +29,7 @@ dependencies:
   '@mui/icons-material': 5.10.9_mo5gypylvz6jbywgfdwdjppqyu
   '@mui/material': 5.10.12_5rzy53przelm5jchjmb5vr6dxy
   '@tanstack/query-core': 4.14.1
+  '@tanstack/react-query': 4.14.1_5qh23tcr3iha6376fuaqv4s6zm
   ethers: 5.7.2
   next: 13.0.0_qtpcxnaaarbm4ws7ughq6oxfve
   react: 18.2.0
@@ -2592,10 +2594,6 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@tanstack/query-core/4.13.4:
-    resolution: {integrity: sha512-DMIy6tgGehYoRUFyoR186+pQspOicyZNSGvBWxPc2CinHjWOQ7DPnGr9zmn/kE9xK4Zd3GXd25Nj3X20+TF6Lw==}
-    dev: false
-
   /@tanstack/query-core/4.14.1:
     resolution: {integrity: sha512-mUejKoFDe4NZB8jQJR1uuAl6IwvkUpOD2m8NcuTVPOu0pcxeeFPdrnHaljwOEFPtlqXoiiIIQGYy6whjCMN+iQ==}
     dev: false
@@ -2616,19 +2614,19 @@ packages:
       - '@tanstack/query-core'
     dev: false
 
-  /@tanstack/react-query-persist-client/4.13.5_is4ndlz6gak5he44tlm5kewax4:
+  /@tanstack/react-query-persist-client/4.13.5_6bivhsnxygn6e77zuwros4oat4:
     resolution: {integrity: sha512-XlUGx3nmEANi588ooCmimo9kBviAsqF7bo4C1mUxlSl3EzGfT+3m4RcH4+Ph7UvyLg/Hy1CzqzNrtdCnAZDDwg==}
     peerDependencies:
       '@tanstack/react-query': 4.13.5
     dependencies:
       '@tanstack/query-persist-client-core': 4.13.4_i53teysoh6fc7r2623qjweje54
-      '@tanstack/react-query': 4.13.5_5qh23tcr3iha6376fuaqv4s6zm
+      '@tanstack/react-query': 4.14.1_5qh23tcr3iha6376fuaqv4s6zm
     transitivePeerDependencies:
       - '@tanstack/query-core'
     dev: false
 
-  /@tanstack/react-query/4.13.5_5qh23tcr3iha6376fuaqv4s6zm:
-    resolution: {integrity: sha512-p2HcWGuqfvG7Pz04un4phWZeXzlITD7Ue0gMXjD56g8y3rP1r5qEYC/BckffrZLf4dZtQeVPCWOa8RYAqx036g==}
+  /@tanstack/react-query/4.14.1_5qh23tcr3iha6376fuaqv4s6zm:
+    resolution: {integrity: sha512-cRgNzigw4GSPwGlTEkXi8hi/xgUnSEt9jCkiC8oAT3PEIdsQ50onZcpXd+JNJcZk2RTh8KM1fGyWz6xYLiY8bg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -2639,7 +2637,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 4.13.4
+      '@tanstack/query-core': 4.14.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-native: 0.70.4_3om5brg7zay6tcgpg3xqhp7nla
@@ -8113,8 +8111,8 @@ packages:
     dependencies:
       '@coinbase/wallet-sdk': 3.5.4_atq3pxwl2vgronp4cy5kf52qjm
       '@tanstack/query-sync-storage-persister': 4.13.4_i53teysoh6fc7r2623qjweje54
-      '@tanstack/react-query': 4.13.5_5qh23tcr3iha6376fuaqv4s6zm
-      '@tanstack/react-query-persist-client': 4.13.5_is4ndlz6gak5he44tlm5kewax4
+      '@tanstack/react-query': 4.14.1_5qh23tcr3iha6376fuaqv4s6zm
+      '@tanstack/react-query-persist-client': 4.13.5_6bivhsnxygn6e77zuwros4oat4
       '@wagmi/core': 0.6.8_uwmz4gniyout2ivpdm7w2wosym
       '@walletconnect/ethereum-provider': 1.8.0
       abitype: 0.1.7_typescript@4.8.4

@@ -9,11 +9,9 @@ import {
 // import { infuraProvider } from 'wagmi/providers/infura';
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 // import { MetaMaskConnector } from "wagmi/connectors/metaMask";
-// import { Profile } from './wagmi/ConnectButton';
-// import Layout from '../component/Layout';
-// import Entry from './wagmi/Entry';
 import { Container } from "@mui/material";
 import ButtonAppBar from '../src/wagmi/ButtonAppBar';
+
   
 const { chains, provider, webSocketProvider } = configureChains (
     // TODO: GanacheからGoerliに変更時に以下変更
