@@ -24,8 +24,8 @@ export default function Burn(){
 
     return(
         <div>
-            <Button disabled={!write} onClick={() => write?.()} variant="contained" color="error">
-                Burn</Button>
+            <Button disabled={!write} onClick={() => write?.()} variant="contained" color="success">
+                Add 5 pages</Button>
                 {isLoading && <div>Check Your Wallet</div>}
                 {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
                 {/* Goerliで使えそうであれば、ステータスの記載につかう */}
