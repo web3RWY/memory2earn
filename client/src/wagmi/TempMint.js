@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
-import { useContractWrite, usePrepareContractWrite, useContractEvent } from "wagmi";
+import { useContractWrite, usePrepareContractWrite, useContractEvent, useContractRead } from "wagmi";
 import { useRouter } from "next/router";
 import MemoryToEarn from "../../../truffle/build/contracts/MemoryToEarn.json"
-import { Button } from "@mui/material";
+import { Button, FormControl, TextField, Box } from "@mui/material";
 
 export default function TempMint() {
     const router = useRouter();
@@ -24,7 +24,6 @@ export default function TempMint() {
             }
         );
 
-    
     const [ _data, _setData ] = useState({});
     useEffect(()=>{
         _setData(data);
@@ -40,14 +39,33 @@ export default function TempMint() {
         }
     })
 
+    const  pages = parseInt(useContractRead({
+        address: contractAddress,
+        abi: contractAbi,
+        functionName: 'getDiaryPages',
+        }).data?._hex);
 
-   
+    const [_pages, _setPages] = useState(0);
+    useEffect(()=>{
+        _setPages(pages);
+    }, [pages]);
+    const diaryPages = [...Array(_pages)].map((_,page) => "");
 
     return(
         <div>
-            <Button disabled={!write} onClick={() => write?.()} variant="contained">
-                Mint
-            </Button>
+            <Box m={1}  >
+            {diaryPages.map((value, index)=>{
+                return(
+                        <Box m={1} component="form" sx={{display: "flex", flexDirection: "row"}} noValidate autoComplete="off">
+                        <TextField label={index} variant="outlined"  id={index} name={index}/>
+                        <Button disabled={!write} onClick={() => write?.()} variant="contained">
+                            Mint
+                        </Button>
+                        </Box>
+                )
+
+            })}
+            </Box>
             {isLoading && <div>Check Wallet</div>}
             {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
         </div>

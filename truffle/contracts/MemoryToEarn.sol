@@ -36,6 +36,7 @@ contract MemoryToEarn is ERC20, ERC20Burnable, AccessControl {
     }
 
     function tempMint() public onlyDiaryHolder {
+        require(diaryPages[msg.sender]>0, "No Page");
         _grantRole(MINTER_ROLE, msg.sender);
         mint(msg.sender, 10 * 10 ** decimals());
         diaryPages[msg.sender] -= 1;

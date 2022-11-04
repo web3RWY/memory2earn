@@ -18,6 +18,16 @@ export default function DiaryData(props){
             functionName: 'balanceOf',
             args: [userAddress]
     });
+    const  pages = parseInt(useContractRead({
+            ...MemoryToEarnContract,
+            functionName: 'getDiaryPages',
+    }).data?._hex);
+
+    const [_pages, _setPages] = useState(0);
+    useEffect(()=>{
+        _setPages(pages);
+    }, [pages]);
+
     const tokenData = useToken({
             address: contractAddress,
     }).data;
@@ -41,10 +51,18 @@ export default function DiaryData(props){
             </Typography>
             <Typography variant='h5' align='center'>
                 Token Amount
-            </Typography>
-                
+            </Typography>                
             <Typography variant="h5" align='center'>
                 {_data?._hex/ (10 ** _tokenData?.decimals)} {_tokenData?.symbol} 
+            </Typography>
+            <Typography align="center">
+                {/* <SavingsIcon sx={{fontSize: 50}}/> */}
+            </Typography>
+            <Typography variant='h5' align='center'>
+                Pages Count
+            </Typography>                
+            <Typography variant="h5" align='center'>
+                {_pages} pages 
             </Typography>
         </CardContent>
         </Card>
