@@ -14,21 +14,22 @@ export default function Diary(){
     const { data, isError, isLoading } = useContractRead({
         address: address,
         abi: abi,
-        functionName: 'diaryHolderCheck'
+        functionName: 'getDiaryPages'
     });
 
-    const [_data, _setData] = useState(false);
+    const [_data, _setData] = useState(0);
     useEffect(()=> {
         _setData(data);
     },[data]);
 
     const userAddress = useAccount.apply().address;
+    const pages = data?._hex;
 
     return(
         <div>
             <Typography variant="h4" align="center">{
-            data ? "Open Diary":"Create Diary"}</Typography>
-            {data
+            pages!=0 ? "Open Diary":"Create Diary"}</Typography>
+            {pages!=0
             ? <Button
                 sx={{display: 'flex', justifyContent: 'center'}}
                 variant="contained"

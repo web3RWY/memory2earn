@@ -5,6 +5,7 @@ import { Typography, Card, CardContent } from '@mui/material';
 import SavingsIcon from '@mui/icons-material/Savings';
 import DiaryData from '../../../component/DiaryData';
 import TempMint from '../../../src/wagmi/TempMint';
+import Burn from '../../../src/wagmi/Burn';
 
 export default function YourDiary(){
 
@@ -15,7 +16,8 @@ export default function YourDiary(){
                 <AutoStoriesIcon color='secondary' sx={{fontSize: 100}}/>
             </Typography>
             <DiaryData />
-            <TempMint />            
+            <TempMint />
+            <Burn />            
         </Layout>
     )
 }

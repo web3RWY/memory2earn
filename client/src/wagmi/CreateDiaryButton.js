@@ -23,7 +23,7 @@ export default function CreateDiaryButton(){
                 onClick={() => write?.()}
                 variant="contained"
                 color="secondary"
-                sx={{display: flex, justifyContent: center}}
+                sx={{display: 'flex', justifyContent: 'center'}}
             >
                 Create Diary!    
             </Button>
