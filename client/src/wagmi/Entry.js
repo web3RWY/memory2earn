@@ -3,6 +3,8 @@ import { useAccount } from "wagmi";
 import Welcome from "../Welcome";
 import Diary from "./Diary";
 
+import WriteMongo from "../WriteMongo"
+
 
 export default function Entry() {
     
@@ -16,6 +18,7 @@ export default function Entry() {
     return (
         <div>
             {_isConnected ? <Diary /> : <Welcome />}
+            <WriteMongo formId="0" articleForm={{user:'', createdAt:'', article:''}} forNewArticle={true} />
         </div>
     );
 }
