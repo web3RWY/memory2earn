@@ -45,6 +45,7 @@ const Form = ({ formId, articleForm, forNewArticle }) => {
 
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async (form) => {
+        console.log(form);
         form.createdAt = Date.now();
     try {
       const res = await fetch('/api/page/', {

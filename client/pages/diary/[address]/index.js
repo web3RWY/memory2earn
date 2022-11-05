@@ -53,7 +53,7 @@ export async function getServerSideProps() {
     const pages = result.map((doc) => {
         const page = doc.toObject();
         page._id = page._id.toString();
-        page.createdAt = page.createdAt.toString();
+        page.createdAt = page.createdAt?.toString();
         return page
     })
 
