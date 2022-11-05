@@ -2,7 +2,8 @@ import React, {useState, useEffect} from "react";
 import { useContractWrite, usePrepareContractWrite, useContractEvent, useContractRead } from "wagmi";
 import { useRouter } from "next/router";
 import MemoryToEarn from "../../../truffle/build/contracts/MemoryToEarn.json"
-import { Button, FormControl, TextField, Box } from "@mui/material";
+import { Button, TextField, Box, Card, CardContent } from "@mui/material";
+import { Typography } from "@mui/material";
 
 export default function TempMint() {
     const contentType = 'application/json'
@@ -20,7 +21,7 @@ export default function TempMint() {
     useEffect(()=>{
         setMongoData((prev) =>({
             ...prev,
-            createdAt: Date.now()
+            createdAt: Date.now(),
         })
         )
     }, [mongoData])
@@ -44,16 +45,6 @@ export default function TempMint() {
     useEffect(()=>{
         _setData(data);
     },[data]);
-
-    useContractEvent({
-        address: contractAddress,
-        abi: contractAbi,
-        eventName: 'minted',
-        listener(event){
-            console.log(`${event} get 10MBT`);
-            router.reload();
-        }
-    })
 
     const  pages = parseInt(useContractRead({
         address: contractAddress,
@@ -120,16 +111,15 @@ export default function TempMint() {
 
         // router.push('/')
         } catch (error) {
-        setMessage('Failed to add pet')
+        setMessage('Failed to write page')
         }
     }
 
-    // const formValidate = () => {
-    //     let err = {}
-    //     if (!form.user) err.address = 'User address is required'
-    //     if (!form.article) err.article = 'Article is required'
-    //     return err
-    // } 
+    const formValidate = () => {
+        let err = {}
+        if (!mongoData.article) err.article = 'Article is required'
+        return err
+    } 
 
     const handleChange = ({target}) => {
         const value = target;
@@ -140,38 +130,38 @@ export default function TempMint() {
         console.log(mongoData);
     }
 
-    const handleSubmit = (event) =>{
+    const  handleSubmit =  (event) =>{
         try {
             // write to mongo
             event.preventDefault()
-            // const errs = formValidate()
-            // if (Object.keys(errs).length === 0) {
-                //   forNewArticle ? postData(form) : putData(form)
-                // setMongoData((prev)=>({
-                //     ...prev,
-                //     createdAt: Date.now()
-                // }))
-                postData(mongoData);
-            // } else {
-            //   setErrors({ errs })
-            // }
-            // write to chain
+            const errs = formValidate()
+            if (Object.keys(errs).length === 0) {
+                 postData(mongoData);
+            } else {
+              setErrors({ errs })
+            }
         } catch (error) {
             console.error(error);
         }
+        // write to chain
         write?.()
 
     }
 
     return(
-        <div>
-            <Box m={1}  >
+            <Card m={1}  >
+                <CardContent>
+                    <Typography variant="h4">Empty Pages</Typography>
+                    <Typography secondary>You can memory whatever you want...</Typography>
+                </CardContent>
+                <CardContent sx={{display: 'flex', flexDirection:'row', flexWrap: 'wrap', justifyContent:'center'}}>
+                    
             {diaryPages.map((value, index)=>{
                 return(
                         <Box
                         m={1}
                         component="form"
-                        sx={{display: "flex", flexDirection: "row"}}
+                        sx={{ display: "flex", flexDirection: "row"}}
                         noValidate
                         autoComplete="off"
                         onSubmit={handleSubmit}
@@ -184,6 +174,9 @@ export default function TempMint() {
                             name="article"
                             key={`text${index}`}
                             onChange={handleChange}
+                            multiline={true}
+                            size="small"
+                            fullWidth
                             />
                         {/* <Button type="submit" disabled={!write} onClick={() => write?.()} variant="contained"> */}
                         <Button type="submit" disabled={!write}  variant="contained" key={`button${index}`}>
@@ -193,10 +186,10 @@ export default function TempMint() {
                 )
 
             })}
-            </Box>
-            {isLoading && <div>Check Wallet</div>}
-            {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
-        </div>
+                </CardContent>
+                {isLoading && <div>Check Wallet</div>}
+                {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
+            </Card>
     )
     
 }

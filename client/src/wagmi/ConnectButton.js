@@ -3,7 +3,7 @@ import { useConnect, useAccount } from 'wagmi'
 import  {Button}  from '@mui/material'
  
 export function ConnectButton() {
-  const { address, connector, isConnected } = useAccount();  
+  const { isConnected } = useAccount();  
   const { connect, connectors, error, isLoading, pendingConnector } = useConnect();
   const [ _isConnected, _setIsConnected ] = useState(false);
   const [ _connectors, _setConnectors ] = useState([]);

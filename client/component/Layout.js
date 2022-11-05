@@ -39,28 +39,10 @@ const { chains, provider, webSocketProvider } = configureChains (
     return (
       <WagmiConfig client={client}>
         <ButtonAppBar />
-        <Container maxWidth="md">
+        <Container maxWidth="md" >
           {props.children}
         </Container>
       </WagmiConfig>
     )
   }
   
-
-
-
-
-
-// import React from "react";
-
-
-// export default function Layout(props) {
-//     return(
-//         <>
-//             <ButtonAppBar />
-//             <Container maxWidth="md">
-//                 {props.children}
-//             </Container>
-//         </>
-//     )
-// }

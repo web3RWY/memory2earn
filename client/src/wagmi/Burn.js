@@ -5,7 +5,6 @@ import {Button} from "@mui/material"
 
 export default function Burn(){
     const router = useRouter();
-    const userAddress = router.query.address;
     const contractAddress = MemoryToEarn.networks[5777].address;
     const contractAbi = MemoryToEarn.abi;
     const { config } = usePrepareContractWrite({

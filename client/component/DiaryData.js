@@ -1,9 +1,11 @@
-import { Card, CardContent,Typography } from "@mui/material";
+import { Card, CardContent,Typography,Grid, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { useContractRead, useToken } from "wagmi";
 import MemoryToEarn from "../../truffle/build/contracts/MemoryToEarn.json";
-import SavingsIcon from "@mui/icons-material/Savings"
+import SavingsIcon from "@mui/icons-material/Savings";
+import ArticleIcon from '@mui/icons-material/Article';
 import React, {useState, useEffect} from "react";
 import {useRouter} from "next/router";
+import { Divider } from "@mui/material";
 
 export default function DiaryData(props){
     const  userAddress  = useRouter().query.address;
@@ -46,24 +48,27 @@ export default function DiaryData(props){
     return(
         <Card sx={{minWidth: 275 }}>
         <CardContent>
-            <Typography align="center">
-                <SavingsIcon sx={{fontSize: 50}}/>
-            </Typography>
-            <Typography variant='h5' align='center'>
-                Token Amount
-            </Typography>                
-            <Typography variant="h5" align='center'>
-                {_data?._hex/ (10 ** _tokenData?.decimals)} {_tokenData?.symbol} 
-            </Typography>
-            <Typography align="center">
-                {/* <SavingsIcon sx={{fontSize: 50}}/> */}
-            </Typography>
-            <Typography variant='h5' align='center'>
-                Pages Count
-            </Typography>                
-            <Typography variant="h5" align='center'>
-                {_pages} pages 
-            </Typography>
+                <List >
+                    <ListItem>
+                        <ListItemIcon>
+                            <SavingsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Token Amount" />
+                    </ListItem>
+                    <ListItemText sx={{textAlign:'right'}} >
+                        {_data?._hex/ (10 ** _tokenData?.decimals)} {_tokenData?.symbol} 
+                    </ListItemText>
+                    <Divider />
+                    <ListItem>
+                        <ListItemIcon>
+                            <ArticleIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Remain Page Count" />
+                    </ListItem>
+                    <ListItemText sx={{textAlign:'right'}} >
+                        {_pages} pages 
+                    </ListItemText>
+                </List>
         </CardContent>
         </Card>
     )

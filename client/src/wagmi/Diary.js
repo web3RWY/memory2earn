@@ -2,10 +2,10 @@ import React, {useState, useEffect} from "react";
 import MemoryToEarn from "../../../truffle/build/contracts/MemoryToEarn.json"
 import { useContractRead } from "wagmi";
 import CreateDiaryButton from "./CreateDiaryButton";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { useRouter } from "next/router";
 import { useAccount } from "wagmi";
-import { Button } from "@mui/material"
+import { Button } from "@mui/material";
 
 export default function Diary(){
     const router = useRouter();
@@ -16,6 +16,12 @@ export default function Diary(){
         abi: abi,
         functionName: 'getDiaryPages'
     });
+    const diaryHolder = useContractRead({
+        address: address,
+        abi: abi,
+        functionName: 'checkDiaryHolder'
+    }).data;
+    console.log(diaryHolder);
 
     const [_data, _setData] = useState(0);
     useEffect(()=> {
@@ -26,12 +32,12 @@ export default function Diary(){
     const pages = data?._hex;
 
     return(
-        <div>
-            <Typography variant="h4" align="center">{
-            pages!=0 ? "Open Diary":"Create Diary"}</Typography>
-            {pages!=0
+        <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection:"column"}}>
+            <Box m={1}>
+                <Typography variant="h4">{diaryHolder ? "Open Diary":"Create Diary"}</Typography>
+            </Box>
+            {diaryHolder
             ? <Button
-                sx={{display: 'flex', justifyContent: 'center'}}
                 variant="contained"
                 color="secondary"
                 onClick={()=> router.push(`./diary/${userAddress}`) }>
@@ -40,6 +46,6 @@ export default function Diary(){
             :<CreateDiaryButton />
             }
             <div>{isError}</div>
-        </div>
+        </Box>
     )
 }

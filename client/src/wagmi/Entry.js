@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import Welcome from "../Welcome";
 import Diary from "./Diary";
-
-import WriteMongo from "../WriteMongo"
-
+import { Box } from "@mui/material"
 
 export default function Entry() {
     
@@ -16,10 +14,9 @@ export default function Entry() {
     },[isConnected])
     
     return (
-        <div>
+        <Box m={5} sx={{display: 'flex', justifyContent: 'center'}}>
             {_isConnected ? <Diary /> : <Welcome />}
-            <WriteMongo formId="0" articleForm={{user:'', createdAt:'', article:''}} forNewArticle={true} />
-        </div>
+        </Box>
     );
 }
 

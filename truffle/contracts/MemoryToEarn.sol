@@ -9,13 +9,14 @@ contract MemoryToEarn is ERC20, ERC20Burnable, AccessControl {
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     mapping (address=>uint256) diaryPages;
+    mapping (address=>bool) diaryHolder;
 
     event newDiaryHolder(address indexed holder);
     event minted(address indexed holder);
     event burned(address indexed holder);
 
     modifier onlyDiaryHolder (){
-        require(diaryPages[msg.sender] > 0, "Not Diary holder");
+        require(diaryHolder[msg.sender], "Not Diary holder");
         _;
     }
 
@@ -36,7 +37,6 @@ contract MemoryToEarn is ERC20, ERC20Burnable, AccessControl {
     }
 
     function tempMint() public onlyDiaryHolder {
-        require(diaryPages[msg.sender]>0, "No Page");
         _grantRole(MINTER_ROLE, msg.sender);
         mint(msg.sender, 10 * 10 ** decimals());
         diaryPages[msg.sender] -= 1;
@@ -45,11 +45,16 @@ contract MemoryToEarn is ERC20, ERC20Burnable, AccessControl {
     }
 
     function createDiary() public {
+        diaryHolder[msg.sender] = true;
         diaryPages[msg.sender] = 5;
         emit newDiaryHolder(msg.sender);
     }
 
     function getDiaryPages() public view returns (uint256) {
         return diaryPages[msg.sender];
+    }
+
+    function checkDiaryHolder() public view returns (bool) {
+        return diaryHolder[msg.sender];
     }
 }
