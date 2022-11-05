@@ -80,8 +80,8 @@ const Form = ({ formId, articleForm, forNewArticle }) => {
 
   const formValidate = () => {
     let err = {}
-    if (!form.user) err.name = 'User address is required'
-    if (!form.article) err.species = 'Article is required'
+    if (!form.user) err.address = 'User address is required'
+    if (!form.article) err.article = 'Article is required'
     return err
   }
 
@@ -107,16 +107,6 @@ const Form = ({ formId, articleForm, forNewArticle }) => {
           onChange={handleChange}
           required
         />
-
-        {/* <label htmlFor="createdAt">createdAt</label>
-        <input
-          type="text"
-          maxLength="20"
-          name="createdAt"
-          value={form.createdAt}
-          onChange={handleChange}
-          required
-        /> */}
 
         <label htmlFor="Article">Article</label>
         <input
