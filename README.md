@@ -139,7 +139,7 @@ MemoryToEarn
 
 clientフォルダに移動し、依存パッケージのインストール
 
-    cd client
+    cd memory2earn/client
     pnpm install
 .env.local.exampleのファイル名を.env.localに変更する
 
