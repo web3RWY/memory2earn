@@ -137,7 +137,7 @@ MemoryToEarn
 
     git clone https://github.com/web3RWY/memory2earn.git
 
-clientフォルダに移動し、依存パッケージのインストール
+memory2earn/clientフォルダに移動し、依存パッケージのインストール
 
     cd memory2earn/client
     pnpm install
