@@ -35,5 +35,13 @@
   "devDependencies": {
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.0"
+  },
+  
+  "pnpm": {
+    "overrides": {
+      "@tanstack/query-sync-storage-persister": "4.13.4",
+      "@tanstack/react-query": "4.13.4",
+      "@tanstack/react-query-persist-client": "4.13.4"
+    }
   }
 }

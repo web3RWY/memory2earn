@@ -50,11 +50,11 @@ contract MemoryToEarn is ERC20, ERC20Burnable, AccessControl {
         emit newDiaryHolder(msg.sender);
     }
 
-    function getDiaryPages() public view returns (uint256) {
-        return diaryPages[msg.sender];
+    function getDiaryPages(address userAddress) public view returns (uint256) {
+        return diaryPages[userAddress];
     }
 
-    function checkDiaryHolder() public view returns (bool) {
-        return diaryHolder[msg.sender];
+    function checkDiaryHolder(address userAddress) public view returns (bool) {
+        return diaryHolder[userAddress];
     }
 }

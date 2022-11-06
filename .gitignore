@@ -50,4 +50,4 @@ Thumbs.db
 
 # local_env
 *.env.local
-
+*.env

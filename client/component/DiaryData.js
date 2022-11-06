@@ -10,7 +10,7 @@ import { Divider } from "@mui/material";
 export default function DiaryData(props){
     const  userAddress  = useRouter().query.address;
     const abi = MemoryToEarn.abi;
-    const contractAddress = MemoryToEarn.networks[5777].address;
+    const contractAddress = MemoryToEarn.networks[5].address;
     const MemoryToEarnContract = {
         abi: abi,
         address: contractAddress,
@@ -23,6 +23,7 @@ export default function DiaryData(props){
     const  pages = parseInt(useContractRead({
             ...MemoryToEarnContract,
             functionName: 'getDiaryPages',
+            args: [userAddress],
     }).data?._hex);
 
     const [_pages, _setPages] = useState(0);

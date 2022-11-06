@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../../../component/Layout';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import { Box,Typography, Card, CardContent, Grid,
+import { Box,Typography, Grid,
             Table, TableContainer, TableBody, TableCell, TableHead,TableRow, Paper  } from '@mui/material';
 import DiaryData from '../../../component/DiaryData';
 import TempMint from '../../../src/wagmi/TempMint';

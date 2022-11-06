@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from "react";
-import { useContractWrite, usePrepareContractWrite, useContractEvent, useContractRead } from "wagmi";
+import { useContractWrite, usePrepareContractWrite, useWaitForTransaction, useContractRead } from "wagmi";
 import { useRouter } from "next/router";
 import MemoryToEarn from "../../../truffle/build/contracts/MemoryToEarn.json"
-import { Button, TextField, Box, Card, CardContent } from "@mui/material";
+import { Button, TextField, Box, Card, CardContent, CircularProgress, Link ,Paper} from "@mui/material";
 import { Typography } from "@mui/material";
 
 export default function TempMint() {
     const contentType = 'application/json'
     const router = useRouter();
     const userAddress = router.query.address;
-    const contractAddress = MemoryToEarn.networks[5777].address;
+    const contractAddress = MemoryToEarn.networks[5].address;
     const contractAbi = MemoryToEarn.abi;
     const [message, setMessage] = useState("");
     const [mongoData, setMongoData] = useState({
@@ -27,36 +27,6 @@ export default function TempMint() {
     }, [mongoData])
 
 
-    const { config } = usePrepareContractWrite({
-        address: contractAddress,
-        abi: contractAbi,
-        functionName: 'tempMint'
-    })
-    const {data, isLoading, isSuccess, write} = useContractWrite({
-                ...config,
-                // TODO: どのタイミングでSuccessになるのかGoerliで確認する。
-                onSuccess() {
-                    router.reload();
-                }
-            }
-        );
-
-    const [ _data, _setData ] = useState({});
-    useEffect(()=>{
-        _setData(data);
-    },[data]);
-
-    const  pages = parseInt(useContractRead({
-        address: contractAddress,
-        abi: contractAbi,
-        functionName: 'getDiaryPages',
-        }).data?._hex);
-
-    const [_pages, _setPages] = useState(0);
-    useEffect(()=>{
-        _setPages(pages);
-    }, [pages]);
-    const diaryPages = [...Array(_pages)].map((_,page) => "");
 
 
 
@@ -121,38 +91,90 @@ export default function TempMint() {
         return err
     } 
 
+    // wagmi Hooks-----------------------------------------
+    const { config } = usePrepareContractWrite({
+        address: contractAddress,
+        abi: contractAbi,
+        functionName: 'tempMint'
+    })
+    const {data, write} = useContractWrite(config);
+
+    const { isLoading, isSuccess } = useWaitForTransaction({
+        hash: data?.hash,
+        async onSuccess(){
+            await postData(mongoData);
+            router.reload();
+        }
+    })
+
+    const [ _data, _setData ] = useState({});
+    useEffect(()=>{
+        _setData(data);
+    },[data]);
+
+    // const  pages = parseInt(useContractRead({
+    //     address: contractAddress,
+    //     abi: contractAbi,
+    //     functionName: 'getDiaryPages',
+    //     args: [userAddress],
+    //     }).data?._hex);
+
+    const [_pages, _setPages] = useState(0);
+    // useEffect(()=>{
+    //     console.log(_pages);
+    // }, []);
+
+    const  pagesData = useContractRead({
+        address: contractAddress,
+        abi: contractAbi,
+        functionName: 'getDiaryPages',
+        args: [userAddress],
+        onSuccess(data){
+            _setPages(parseInt(data._hex));
+            console.log(_pages);
+        }
+        }).data;
+
+// TODO:新規日記作成時のエラー表示 invalid Array length
+
+    // const [diaryPages, setDiaryPages] = useState([]);
+    // useEffect(()=>{
+    //     console.log(diaryPages)
+    //     setDiaryPages([...Array(_pages)].map((_,page) => ""));
+    //     console.log(diaryPages)
+    // }, [_pages]);
+    const diaryPages = [...Array(_pages ? _pages: 0 )].map((_,page) => "");
+
+
     const handleChange = ({target}) => {
         const value = target;
         setMongoData((prev) => ({
             ...prev,
             article: target.value
         }))
-        console.log(mongoData);
     }
 
     const  handleSubmit =  (event) =>{
-        try {
             // write to mongo
             event.preventDefault()
-            const errs = formValidate()
-            if (Object.keys(errs).length === 0) {
-                 postData(mongoData);
-            } else {
-              setErrors({ errs })
-            }
-        } catch (error) {
-            console.error(error);
-        }
-        // write to chain
-        write?.()
-
+            write?.()
     }
 
     return(
             <Card m={1}  >
                 <CardContent>
-                    <Typography variant="h4">Empty Pages</Typography>
-                    <Typography secondary>You can memory whatever you want...</Typography>
+                    <Box sx={{display:'flex', flexDirection: 'colomn', width:'100%', alignItems:'center'}}>
+                        <Box>
+                            <Typography variant="h4">Empty Pages</Typography>
+                            <Typography secondary="true">You can memory whatever you want...</Typography>
+                        </Box>
+                        <Box m={1} sx={{ display:'flex', justifyContent:'center', alignItems:'center', backgroundColor: 'success.main',height: 50, minWidth:100}}>
+                            <Typography color="white">Get<br />10 MET !!</Typography>
+                        </Box>
+                        <Box>
+                            {isLoading && <CircularProgress color="success" />}
+                        </Box>
+                    </Box>
                 </CardContent>
                 <CardContent sx={{display: 'flex', flexDirection:'row', flexWrap: 'wrap', justifyContent:'center'}}>
                     
@@ -178,17 +200,16 @@ export default function TempMint() {
                             size="small"
                             fullWidth
                             />
-                        {/* <Button type="submit" disabled={!write} onClick={() => write?.()} variant="contained"> */}
-                        <Button type="submit" disabled={!write}  variant="contained" key={`button${index}`}>
-                            Mint
+                        <Button type="submit" disabled={!write || isLoading}  variant="contained" key={`button${index}`}>
+                            Write
                         </Button>
                         </Box>
                 )
 
             })}
                 </CardContent>
-                {isLoading && <div>Check Wallet</div>}
-                {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
+                {isLoading && <div>Writing on Blockchain...</div>}
+                {isSuccess && <Link href={`https://goerli.etherscan.io/tx/${data?.hash}`}>Etherscan(Goerli)</Link>}
             </Card>
     )
     

@@ -1,35 +1,39 @@
-import { useContractWrite, usePrepareContractWrite, useContractEvent } from "wagmi";
+import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi";
 import { useRouter } from "next/router";
 import MemoryToEarn from "../../../truffle/build/contracts/MemoryToEarn.json";
-import {Button} from "@mui/material"
+import {Button, Box, CircularProgress, Typography, Stack} from "@mui/material"
 
 export default function Burn(){
     const router = useRouter();
-    const contractAddress = MemoryToEarn.networks[5777].address;
+    const contractAddress = MemoryToEarn.networks[5].address;
     const contractAbi = MemoryToEarn.abi;
     const { config } = usePrepareContractWrite({
         address: contractAddress,
         abi: contractAbi,
         functionName: 'burn'
     })
-    const { data, isLoading, isSuccess, write, status } = useContractWrite({
-        ...config,
-        // TODO:Goerliの挙動に応じてコード変更
+    const { data, write} = useContractWrite(config);
+
+    const { isLoading, isSuccess } = useWaitForTransaction({
+        hash: data?.hash,
         onSuccess(){
             router.reload();
         }
-    });
+    })
 
 
     return(
-        <div>
-            <Button disabled={!write} onClick={() => write?.()} variant="contained" color="success">
-                Add 5 pages</Button>
-                {isLoading && <div>Check Your Wallet</div>}
-                {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
-                {/* Goerliで使えそうであれば、ステータスの記載につかう */}
-                <div>{status}</div>
-        </div>
+        <Box mt={1} sx={{width:'100%', display: 'flex', alignItems: 'center',flexDirection: 'row', justifyContent: 'center', backgroundColor: 'grey.300'}}>
+
+            <Box m={1} sx={{display: 'flex', flexDirection:'row', alignItems: 'center'}}>
+                 {isLoading && <CircularProgress />}
+                <Button sx={{marginLeft: 1}} disabled={!write} onClick={() => write?.()} variant="contained" color="secondary">
+                    Add 5 pages</Button>
+            </Box>
+            <Box>
+                <Typography error='true'>Cost: 5 MET</Typography>
+            </Box>
+        </Box>
 
     )
 }
