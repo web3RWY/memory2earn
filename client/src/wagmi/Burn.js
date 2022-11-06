@@ -27,7 +27,7 @@ export default function Burn(){
 
             <Box m={1} sx={{display: 'flex', flexDirection:'row', alignItems: 'center'}}>
                  {isLoading && <CircularProgress />}
-                <Button sx={{marginLeft: 1}} disabled={!write} onClick={() => write?.()} variant="contained" color="secondary">
+                <Button sx={{marginLeft: 1}} disabled={!write || isLoading} onClick={() => write?.()} variant="contained" color="secondary">
                     Add 5 pages</Button>
             </Box>
             <Box>
