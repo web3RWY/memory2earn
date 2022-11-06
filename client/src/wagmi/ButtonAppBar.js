@@ -36,7 +36,7 @@ export default function ButtonAppBar() {
             <Image src={Logo} width={40} height={40} alt="Logo"/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Memory2Earn
+            Memory2Earn(Demo)
           </Typography>
           { _isConnected ? <Profile /> : <ConnectButton />}
         </Toolbar>
