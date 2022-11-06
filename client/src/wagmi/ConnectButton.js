@@ -30,8 +30,6 @@ export function ConnectButton() {
            >
              {!isLoading ?.id &&
                'CONNECT WALLET'}
-             {/* {connector.name}
-             {!connector.ready && ' (unsupported)'} */}
              {isLoading &&
                connector.id === pendingConnector?.id &&
                '(connecting)'}

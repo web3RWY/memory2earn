@@ -8,5 +8,4 @@ const pageSchema = new Schema({
     article: String
 });
 
-// export default mongoose.models.Page || mongoose.model('Page', pageSchema);
 export default mongoose.models.Page || mongoose.model('Page', pageSchema);

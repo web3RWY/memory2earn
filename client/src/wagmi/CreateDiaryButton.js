@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { useAccount } from "wagmi";
 
 export default function CreateDiaryButton(){
-    // TODO:Goerli変更時に以下の記述を変更
     const router = useRouter();
     const abi = MemoryToEarn.abi;
     const address = MemoryToEarn.networks[5].address;
@@ -33,12 +32,6 @@ export default function CreateDiaryButton(){
       }
     });
 
-    // useEffect(()=>{
-    //   _setIsSuccess(isSuccess);
-    //   _isSuccess && router.push(`/diary/${userAddress}`);
-    // },[isSuccess]);
-
-
     const handleClick = () => {
       try {
         write?.()
@@ -51,7 +44,6 @@ export default function CreateDiaryButton(){
         <Box m={1} sx={{display: 'flex', flexDirection:'column', justifyContent: 'center'}}>
             <Button
                 disabled={!write || isLoading}
-                // onClick={() => write?.()}
                 onClick={handleClick}
                 variant="contained"
                 color="secondary"

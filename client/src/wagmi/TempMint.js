@@ -25,11 +25,6 @@ export default function TempMint() {
         })
         )
     }, [mongoData])
-
-
-
-
-
     // 
     // Mongo Methods------------------------------
     // 
@@ -112,17 +107,7 @@ export default function TempMint() {
         _setData(data);
     },[data]);
 
-    // const  pages = parseInt(useContractRead({
-    //     address: contractAddress,
-    //     abi: contractAbi,
-    //     functionName: 'getDiaryPages',
-    //     args: [userAddress],
-    //     }).data?._hex);
-
     const [_pages, _setPages] = useState(0);
-    // useEffect(()=>{
-    //     console.log(_pages);
-    // }, []);
 
     const  pagesData = useContractRead({
         address: contractAddress,
@@ -135,14 +120,6 @@ export default function TempMint() {
         }
         }).data;
 
-// TODO:新規日記作成時のエラー表示 invalid Array length
-
-    // const [diaryPages, setDiaryPages] = useState([]);
-    // useEffect(()=>{
-    //     console.log(diaryPages)
-    //     setDiaryPages([...Array(_pages)].map((_,page) => ""));
-    //     console.log(diaryPages)
-    // }, [_pages]);
     const diaryPages = [...Array(_pages ? _pages: 0 )].map((_,page) => "");
 
 
@@ -155,7 +132,6 @@ export default function TempMint() {
     }
 
     const  handleSubmit =  (event) =>{
-            // write to mongo
             event.preventDefault()
             write?.()
     }
