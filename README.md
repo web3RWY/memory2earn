@@ -147,7 +147,9 @@ memory2earn/clientフォルダに移動し、依存パッケージのインス�
 
     pnpm run dev
 
+## ブラウザでアクセスする
 Webブラウザでhttp://localhost:3000にアクセスする
+**ウォレット接続時には必ずGoerliネットワークを選択してください**
 
 
 

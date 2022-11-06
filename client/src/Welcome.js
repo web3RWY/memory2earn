@@ -8,7 +8,7 @@ export default function Welcome(){
         <Box m={1}>
             <Box m={2}>
                 <Typography variant="h4" align="center">
-                    Welcome to "Memory To Earn" !!
+                    Welcome to &quot;Memory To Earn&quot; !!
                 </Typography>
                 <Typography variant="h4" align="center">
                     Firstly, Please connect your wallet...
