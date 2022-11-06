@@ -29,7 +29,7 @@ export function ConnectButton() {
              variant='contained'
            >
              {!isLoading ?.id &&
-               'CONNECT WALLET'}
+               'CONNECT WALLET(JUST Goerli)'}
              {isLoading &&
                connector.id === pendingConnector?.id &&
                '(connecting)'}
